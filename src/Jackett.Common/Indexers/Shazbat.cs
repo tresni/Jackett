@@ -20,7 +20,7 @@ namespace Jackett.Common.Indexers
         private string LoginUrl { get { return SiteLink + "login"; } }
         private string SearchUrl { get { return SiteLink + "search"; } }
         private string TorrentsUrl { get { return SiteLink + "torrents"; } }
-        private string ShowUrl { get { return SiteLink + "show?id="; } }
+        private string ShowUrl { get { return SiteLink + "show?id={id}&show_mode=torrents"; } }
         private string RSSProfile { get { return SiteLink + "rss_feeds"; } }
 
         private new ConfigurationDataBasicLoginWithRSS configData
@@ -111,7 +111,7 @@ namespace Jackett.Common.Indexers
                 var shows = dom.Find("div.show[data-id]");
                 foreach (var show in shows)
                 {
-                    var showUrl = ShowUrl + show.GetAttribute("data-id");
+                    var showUrl = ShowUrl.replace("{id}", show.GetAttribute("data-id"));
                     searchUrls.Add(showUrl);
                 }
             }
