@@ -128,12 +128,7 @@ namespace Jackett.Common.Indexers
                     results = await ReloginIfNecessary(results);
 
                     CQ dom = results.Content;
-                    var rows = dom["#torrent-table tr"];
-
-                    if (!string.IsNullOrWhiteSpace(queryString))
-                    {
-                        rows = dom["table tr"];
-                    }
+                    var rows = dom["table tr"];
 
                     var globalFreeleech = dom.Find("span:contains(\"Freeleech until:\"):has(span.datetime)").Any();
 
